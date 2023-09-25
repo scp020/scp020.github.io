@@ -1,0 +1,65 @@
+baseurl:
+url: https://scp020.github.io
+title: scp020's personal site
+subtitle: "杂物间"
+description: "快乐小屋"
+date_format: "ordinal"
+# timezone: Asia/Shenyang
+encoding: "utf-8"
+side_bar_repo_limit: 5
+
+author: scp020
+organization: NEYC
+organization_url: https://www.neyc.cn/
+github_username: scp020
+location: Shenyang, China
+email: 33299235@qq.com
+
+# Navigation
+navs:
+  -
+    href: /
+    label: Homepage
+
+  -
+    href: /categories/
+    label: Blogs
+
+  # -
+  #   href: /links/
+  #   label: Links
+
+# RSS
+subscribe_rss: /feed.xml
+
+# Jekyll
+markdown: kramdown
+kramdown:
+    input: GFM
+highlighter: rouge
+paginate: 8
+lsi: false
+quiet: false
+excerpt_separator: "\n\n"
+permalink: /:year/:month/:day/:title/
+plugins:
+    - jekyll-github-metadata
+    - rouge
+#     - jekyll-html-pipeline
+    - jekyll-paginate
+    - jekyll-sitemap
+    - jekyll-feed
+    - jemoji
+#     - jekyll-mentions
+
+repository: scp020/scp020.github.io
+
+# Search
+simple_jekyll_search:
+    fulltext: false # full text search enable
+    limit: 10 # limitation of the search results to show
+
+# Analytics
+google:
+    analytics_id: UA-80669434-1
+github: [metadata]
