@@ -63,3 +63,16 @@ simple_jekyll_search:
 google:
     analytics_id: UA-80669434-1
 github: [metadata]
+
+# can be ['giscus']
+comments_engine: na
+
+giscus:
+  repo: ''
+  repo_id: ''
+  category: ''
+  category_id: ''
+  mapping: 'pathname'
+  input_position: 'bottom'
+  theme: 'light'
+  lang: "en"
