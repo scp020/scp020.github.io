@@ -160,27 +160,11 @@ comments: false
 
 
 
-<!DOCTYPE html>
-<html lang="en">
- 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
-    <title>Document</title>
-</head>
- 
-<body>
- 
-</body>
+<script src="https://unpkg.com/live2d-widget/lib/L2Dwidget.min.js"></script>
+<script src="https://unpkg.com/live2d-widget/lib/L2Dwidget.0.min.js"></script>
 <script>
- 
+　　L2Dwidget.init({ 
+　　"model": {jsonPath:"https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json","scale": 1 }, 
+　　"display": { "position": "left", "width": 150, "height": 300,"hOffset": 0, "vOffset": -20 }
+  });
 </script>
- 
-</html>
