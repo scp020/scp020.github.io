@@ -72,7 +72,7 @@ $$\S 2.1 \ 性质活泼的氧气$$
 
 四. 氧气的制法。
 
-（一）工业制法（分离液态空气法）：$\ce{\text{空气} \xrightarrow{除尘、除\ \ce{CO2}、除\ \ce{H2O}、加压降温} \text{液态空气} \xrightarrow{加热，氮气沸腾} \text{液态氧气} \xrightarrow{存储} \text{蓝色钢瓶}}$。
+（一）工业制法（分离液态空气法）：$\ce{空气 \xrightarrow{除尘、除\ \ce{CO2}、除\ \ce{H2O}、加压降温} 液态空气 \xrightarrow{加热，氮气沸腾} 液态氧气 \xrightarrow{存储} 蓝色钢瓶}$。
 
 （二）实验室制法：
 
