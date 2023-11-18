@@ -245,7 +245,7 @@ $$\S 3.3 \ 物质的组成$$
 
 （一）化合价
 
-$$一价\ \ce{H F K Na Ag}\ \ \ \ 二价\ \ce{O Ca Ba Mg Zn} \\ 三\ \ce{Al}\ 四\ \ce{Si}\ 五价\ \ce{P}\ \ \ \ 一二\ \ce{Cu Hg}\ 四七\ \ce{Mn}\\ 二三\ \ce{Fe}\ 二四\ \ce{C}\ \ \ \ 二四六\ \ce{S}\ 三五\ \ce{N}\ \ \ \\ 一五七\ \ce{Cl}\ 常常见\ \ \ \ 单质零价永不变\ \ \ \ \ \ \$$
+$$一价\ \ce{H F K Na Ag}\ \ \ \ 二价\ \ce{O Ca Ba Mg Zn} \\ 三\ \ce{Al}\ 四\ \ce{Si}\ 五价\ \ce{P}\ \ \ \ 一二\ \ce{Cu Hg}\ 四七\ \ce{Mn}\\ 二三\ \ce{Fe}\ 二四\ \ce{C}\ \ \ \ 二四六\ \ce{S}\ 三五\ \ce{N}\ \ \ \\ 一五七\ \ce{Cl}\ 常常见\ \ \ \ 单质零价永不变\ \ \ \ \ \color{White}{ }$$
 
 （二）规律
 
