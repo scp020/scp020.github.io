@@ -70,6 +70,7 @@ comments_engine: na
 # Disqus (Set to your disqus id)
 disqus: jekyll-tale
 
+# Giscus
 giscus:
   repo: ''
   repo_id: ''
@@ -79,3 +80,9 @@ giscus:
   input_position: 'bottom'
   theme: 'light'
   lang: "en"
+
+# MathJax support
+mathjax:
+  enable: true
+  per_page: true
+  input: "tex"
