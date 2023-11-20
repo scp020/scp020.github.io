@@ -9,27 +9,25 @@ MathJax.Hub.Config({
     processEscapes: true
   },
   TeX: {
-    extensions: ["mhchem.js","autoload.js","AMSmath.js", "AMSsymbols.js"],
-    autoload: {
-      tex: {
-        autoload: expandable({
-          action: ['toggle', 'mathtip', 'texttip'],
-          amscd: [[], ['CD']],
-          bbox: ['bbox'],
-          boldsymbol: ['boldsymbol'],
-          braket: ['bra', 'ket', 'braket', 'set', 'Bra', 'Ket', 'Braket', 'Set', 'ketbra', 'Ketbra'],
-          cancel: ['cancel', 'bcancel', 'xcancel', 'cancelto'],
-          color: ['color', 'definecolor', 'textcolor', 'colorbox', 'fcolorbox'],
-          enclose: ['enclose'],
-          extpfeil: ['xtwoheadrightarrow', 'xtwoheadleftarrow', 'xmapsto',
-                     'xlongequal', 'xtofrom', 'Newextarrow'],
-          html: ['data', 'href', 'class', 'style', 'cssId'],
-          mhchem: ['ce', 'pu'],
-          newcommand: ['newcommand', 'renewcommand', 'newenvironment', 'renewenvironment', 'def', 'let'],
-          unicode: ['unicode'],
-          verb: ['verb']
-        }
-      }
+    extensions: ["mhchem.js","autoload.js","AMSmath.js", "AMSsymbols.js"]
+  }
+  tex: {
+    autoload: expandable({
+      action: ['toggle', 'mathtip', 'texttip'],
+      amscd: [[], ['CD']],
+      bbox: ['bbox'],
+      boldsymbol: ['boldsymbol'],
+      braket: ['bra', 'ket', 'braket', 'set', 'Bra', 'Ket', 'Braket', 'Set', 'ketbra', 'Ketbra'],
+      cancel: ['cancel', 'bcancel', 'xcancel', 'cancelto'],
+      color: ['color', 'definecolor', 'textcolor', 'colorbox', 'fcolorbox'],
+      enclose: ['enclose'],
+      extpfeil: ['xtwoheadrightarrow', 'xtwoheadleftarrow', 'xmapsto',
+                 'xlongequal', 'xtofrom', 'Newextarrow'],
+      html: ['data', 'href', 'class', 'style', 'cssId'],
+      mhchem: ['ce', 'pu'],
+      newcommand: ['newcommand', 'renewcommand', 'newenvironment', 'renewenvironment', 'def', 'let'],
+      unicode: ['unicode'],
+      verb: ['verb']
     }
   }
 });
