@@ -80,9 +80,3 @@ giscus:
   input_position: 'bottom'
   theme: 'light'
   lang: "en"
-
-# MathJax support
-mathjax:
-  enable: true
-  per_page: true
-  input: "tex"
