@@ -67,7 +67,7 @@ $$\S 5.1 \ 金属的性质$$
     - $\ce{Fe + 2HCl \xlongequal{} FeCl2 + H2 ^}$。
     - 现象：固体消失，产生气泡。镁：放大量热。铁：溶液从无色变成绿色。
     - 反应后溶液质量一定增加。
-    - 常见金属活动性顺序：$\ce{K Ca Na}\ \boxed{\ce{Mg Al,Zn Fe}}\ \ce{Sn Pb (H),Cu Hg Ag Pt Au}$。
+    - 常见金属活动性顺序：$\ce{K,Ca,Na},\boxed{\ce{Mg,Al,Zn,Fe}},\ce{Sn,Pb,(H),Cu,Hg,Ag Pt,Au}$，其中 $\ce{H}$ 指酸中的阳离子（氢离子）。
     - 置换时活动性强的置换活动性差的。
     - 相同条件下，常考 $4$ 种金属生成 $\ce{H2}$ 快慢：$\ce{Mg > Al > Zn > Fe}$。
     - 生成 $\ce{H2}$ 多少：$m=\dfrac{m_金 \times 化合价}{相对原子质量}$，等质量 $4$ 种金属生成 $\ce{H2}$ 质量：$\ce{Al > Mg > Fe > Zn}$。
