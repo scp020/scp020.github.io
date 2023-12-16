@@ -190,7 +190,7 @@ $$\begin{matrix}\underbrace{\ce{K,Ca,Na,Mg,Al}},\underbrace{\ce{Zn,Fe,Sn,Pb,Cu}}
     - $\ce{Co + CuO \xlongequal{\Delta} CO2 + Cu}$。
 7. 反应类型
     - $\ce{H2}$ 和 $\ce{C}$ 属于置换反应，$\ce{CO}$ 不属于基本反应类型。
-    - $置换反应\begin{cases}溶液\begin{cases}金属与酸反应 \\ 金属与盐反应生成另一种金属\end{cases} \\ 非溶液：\ce{H2}\ 或\ \ce{C}\ 与化合物反应生成金属\end{cases}$
+    - $置换反应\begin{cases}溶液\begin{cases}金属与酸反应 \\ 金属与盐反应生成另一种金属\end{cases} \\ 非溶液：\ce{H2}或\ce{C}与化合物反应生成金属\end{cases}$
 8. 玻璃管中固体质量减少，减少的是反应的氧元素质量（可用于计算）。
 9. 以 $\ce{Fe}$，稀 $\ce{H2SO4}$，$\ce{CuO}$ 为原料制铜
     - $\begin{cases}\ce{Fe + H2SO4 \xlongequal{} FeSO4 + H2 ^} \\ \ce{H2 + CuO \xlongequal{\Delta} Cu + H2O}\end{cases}$
