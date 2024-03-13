@@ -47,7 +47,7 @@ $.extend( $.ui, {
 		PERIOD: 190,
 		RIGHT: 39,
 		SPACE: 32,
-		TAB: 9,
+		TAB: 4,
 		UP: 38
 	}
 });
