@@ -1,0 +1,6 @@
+.vscode/*.json
+*.exe
+*.txt
+under_test
+GEOMETRY
+MISC
