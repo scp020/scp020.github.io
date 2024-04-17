@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /index.html
 
 User-agent: Yisouspider
 Allow: /
