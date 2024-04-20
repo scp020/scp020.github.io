@@ -1,0 +1,11 @@
+[workspace]
+
+members = [
+    "srs-4l",
+    "compute",
+
+    "gomen",
+    "legal-boards",
+]
+
+resolver = "2"

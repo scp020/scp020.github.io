@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PC solver</title>
+
+    <style type="text/css">
+        mino-board {
+            display: block;
+
+            width: 200px;
+            white-space: pre-line;
+            font-family: monospace;
+        }
+
+        mino-board>svg {
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            from {
+                filter: none;
+            }
+
+            to {
+                filter: grayscale(100%) blur(2px);
+            }
+        }
+
+        .loading {
+            animation: loading .2s forwards;
+        }
+
+        #solutions {
+            display: grid;
+            grid: auto-flow / repeat(auto-fill, 200px);
+            gap: 10px;
+            justify-content: space-evenly;
+            place-items: center;
+
+            padding: 10px;
+        }
+
+        #solutions>mino-board {
+            padding: 10px;
+        }
+
+        #query {
+            margin: 10px;
+            padding: 10px;
+            width: max-content;
+
+            border: 1px solid black;
+            border-radius: 5px;
+
+            display: grid;
+            grid-template-columns: 10rem 200px;
+            align-items: start;
+            gap: 20px 10px;
+        }
+
+        #query h1 {
+            grid-column: span 2;
+            margin: 0;
+        }
+
+        #query div.label {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        #query details {
+            margin-left: .5rem;
+            color: gray;
+        }
+
+        #query details[open] {
+            color: black;
+        }
+
+        #query details summary {
+            cursor: pointer;
+        }
+
+        #query details pre {
+            margin: .2rem 1rem;
+        }
+
+        .error {
+            margin: .2rem;
+            color: red;
+        }
+
+        #initial-info {
+            color: green;
+
+            font-family: sans-serif;
+            font-size: small;
+
+            justify-self: end;
+            align-self: end;
+        }
+
+        label {
+            cursor: pointer;
+        }
+
+        #initial {
+            display: grid;
+            grid: auto-flow / repeat(10, 20px);
+            border-radius: 4px;
+        }
+
+        #initial>input {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #F3F3ED;
+            padding: 0;
+            margin: 0;
+        }
+
+        #initial>input:checked {
+            background-color: #686868;
+        }
+    </style>
+
+    <script src="./mino-board.js"></script>
+
+</head>
+
+<body>
+
+    <div id="query">
+
+        <h1>PC solver</h1>
+
+        <div class="label">Initial field</div>
+        <div style="grid-row: span 2;">
+            <div id="initial">
+                <input type="checkbox" id="cell30"> <input type="checkbox" id="cell31">
+                <input type="checkbox" id="cell32"> <input type="checkbox" id="cell33">
+                <input type="checkbox" id="cell34"> <input type="checkbox" id="cell35">
+                <input type="checkbox" id="cell36"> <input type="checkbox" id="cell37">
+                <input type="checkbox" id="cell38"> <input type="checkbox" id="cell39">
+                <input type="checkbox" id="cell20"> <input type="checkbox" id="cell21">
+                <input type="checkbox" id="cell22"> <input type="checkbox" id="cell23">
+                <input type="checkbox" id="cell24"> <input type="checkbox" id="cell25">
+                <input type="checkbox" id="cell26"> <input type="checkbox" id="cell27">
+                <input type="checkbox" id="cell28"> <input type="checkbox" id="cell29">
+                <input type="checkbox" id="cell10"> <input type="checkbox" id="cell11">
+                <input type="checkbox" id="cell12"> <input type="checkbox" id="cell13">
+                <input type="checkbox" id="cell14"> <input type="checkbox" id="cell15">
+                <input type="checkbox" id="cell16"> <input type="checkbox" id="cell17">
+                <input type="checkbox" id="cell18"> <input type="checkbox" id="cell19">
+                <input type="checkbox" id="cell0"> <input type="checkbox" id="cell1">
+                <input type="checkbox" id="cell2"> <input type="checkbox" id="cell3">
+                <input type="checkbox" id="cell4"> <input type="checkbox" id="cell5">
+                <input type="checkbox" id="cell6"> <input type="checkbox" id="cell7">
+                <input type="checkbox" id="cell8"> <input type="checkbox" id="cell9">
+            </div>
+        </div>
+        <div id="initial-info"></div>
+
+        <div>
+            <div class="label">Queue</div>
+            <details>
+                <summary>Examples</summary>
+                <pre>IJLOSTZ</pre>
+                <pre>L[TS]I</pre>
+                <pre>L[TS]2I</pre>
+                <pre>*5</pre>
+            </details>
+        </div>
+        <div style="display: grid">
+            <input type="text" id="queue">
+            <div id="queue-errors" class="error"></div>
+            <label><input id="hold" type="checkbox" checked> Use hold</label>
+        </div>
+
+        <div class="label">Rotation system</div>
+        <div style="display: grid">
+            <form id="physics-form" style="display: grid">
+                <label><input type="radio" name="physics" value="SRS" checked> SRS</label>
+                <label><input type="radio" name="physics" value="Jstris"> Jstris 180</label>
+                <label><input type="radio" name="physics" value="TETRIO"> TETRIO 180</label>
+            </form>
+        </div>
+
+        <progress id="progress" style="grid-column: span 2;"></progress>
+
+    </div>
+
+    <div id="loading">Loading solver...</div>
+
+    <div id="solutions"></div>
+
+    <script src="./pkg/gomen.js"></script>
+
+    <script type="module">
+        let worker = new Worker("worker.js");
+        let work = null;
+
+        let initialInfo = document.getElementById("initial-info");
+        let queue = document.getElementById("queue");
+        let queueErrors = document.getElementById("queue-errors");
+        let hold = document.getElementById("hold");
+        let physics = document.getElementById("physics-form").physics;
+        let progress = document.getElementById("progress");
+        let solutions = document.getElementById("solutions");
+        let progressTimeout = window.setTimeout(() => { }, 0);
+
+        worker.onmessage = message => {
+            if (message.data.kind == "ready") {
+                document.getElementById("loading").remove();
+
+                if (work != null) {
+                    worker.postMessage(work);
+                } else {
+                    hideProgress();
+                }
+
+                return;
+            }
+
+            if (message.data.kind == "slow" && message.data.query.garbage == getGarbage()[0]) {
+                initialInfo.innerText = "";
+                return;
+            }
+
+            if (message.data.kind == "fast" && message.data.query.garbage == getGarbage()[0]) {
+                initialInfo.innerText = "fast";
+                return;
+            }
+
+            if (message.data.kind == "progress") {
+                progress.value = message.data.amount;
+                return;
+            }
+
+            if (message.data.query.queue != work.queue
+                || message.data.query.garbage != work.garbage
+                || message.data.query.hold != work.hold
+                || message.data.query.count != work.count
+                || message.data.query.physics != work.physics) {
+                worker.postMessage(work);
+                showProgress();
+                return;
+            } else {
+                work = null;
+                hideProgress();
+                solutions.innerHTML = "";
+                solutions.classList.remove("loading");
+            }
+
+            showSolutions(message.data.solutions, 50);
+            let count = message.data.solutions.length;
+
+            if (count > 50) {
+                let button = document.createElement("button");
+                button.innerText = `And ${count - 50} more...`;
+                button.onclick = () => showSolutions(message.data.solutions, count);
+                solutions.appendChild(button);
+            }
+        }
+
+        function hideProgress() {
+            window.clearTimeout(progressTimeout);
+            progress.style.display = "none";
+        }
+        function showProgress() {
+            progress.removeAttribute("value");
+            window.clearTimeout(progressTimeout);
+            progressTimeout = window.setTimeout(() => {
+                progress.style.display = "";
+            }, 1000);
+        }
+
+        function showSolutions(solns, count) {
+            if (solns.length == 0) {
+                solutions.innerText = "no solutions";
+            } else {
+                solutions.innerHTML = "";
+            }
+
+            for (const soln of solns) {
+                if (count == 0) { break; }
+                count--;
+
+                let [cells, id] = soln.split("|");
+
+                let link = document.createElement("a");
+                link.href = "./solution-info.html?s=" + id;
+                link.target = "_blank";
+
+                link.appendChild(new MinoBoard(cells));
+                solutions.appendChild(link);
+            }
+        }
+
+        function getGarbage() {
+            let garbage = 0n;
+            let garbageCount = 0;
+
+            for (let i = 0n; i < 40n; i++) {
+                if (document.getElementById("cell" + i).checked) {
+                    garbage |= 1n << i;
+                    garbageCount += 1;
+                }
+            }
+
+            return [garbage, garbageCount];
+        }
+
+        function setGarbage(garbage) {
+            for (let i = 0n; i < 40n; i++) {
+                let cell = document.getElementById("cell" + i);
+                let isChecked = (garbage & (1n << i)) != 0n;
+                cell.checked = isChecked;
+            }
+        }
+
+        function doSolve() {
+            let whole = /^([ILJOSTZ]|(\[[ILJOSTZ]+\]|\*)\d*)*$/;
+            if (!whole.test(queue.value)) {
+                queueErrors.innerText = "bad queue (see examples)";
+                return;
+            }
+
+            let bag = /[ILJOSTZ]|\[([ILJOSTZ]+)\](\d*)|(\*)(\d*)/g;
+            let pieceCount = 0;
+
+            for (let match of queue.value.matchAll(bag)) {
+                if (match[1]) {
+                    let bagSize = match[1].length;
+                    let bagCount = parseInt(match[2], 10) || 1;
+                    pieceCount += bagCount;
+
+                    if (bagCount > bagSize) {
+                        queueErrors.innerText = `bag [${match[1]}] has only ${bagSize} shapes`;
+                        return;
+                    }
+                }
+
+                if (match[3]) {
+                    let bagSize = 7;
+                    let bagCount = parseInt(match[4], 10) || 1;
+                    pieceCount += bagCount;
+
+                    if (bagCount > bagSize) {
+                        queueErrors.innerText = `bag * has only ${bagSize} shapes`;
+                        return;
+                    }
+                }
+            }
+
+            let [garbage, garbageCount] = getGarbage();
+
+            if (garbageCount + pieceCount * 4 > 44) {
+                queueErrors.innerText = `too many pieces in queue (${pieceCount} total)`;
+                return;
+            }
+
+            queueErrors.innerText = "";
+
+            if (work == null) {
+                solutions.classList.add("loading");
+                work = { queue: queue.value, garbage,
+                         hold: hold.checked, physics: physics.value };
+                worker.postMessage(work);
+                showProgress();
+            } else {
+                work = { queue: queue.value, garbage,
+                         hold: hold.checked, physics: physics.value };
+            }
+        }
+
+        queue.addEventListener("input", (ev) => {
+            for (let i = 0; i < queue.value.length; i++) {
+                let val = queue.value[i];
+                if (val.toUpperCase() != val) {
+                    queue.setRangeText(queue.value[i].toUpperCase(), i, i + 1, "end");
+                }
+            }
+
+            doSolve();
+        });
+
+        hold.addEventListener("input", (ev) => doSolve());
+
+        document.getElementById("physics-form")
+            .addEventListener("input", (ev) => doSolve());
+
+        let dragState = null;
+
+        for (let i = 0; i < 40; i++) {
+            let cell = document.getElementById("cell" + i);
+
+            cell.addEventListener("input", (ev) => doSolve());
+
+            cell.addEventListener("mousedown", (ev) => {
+                cell.checked = !cell.checked;
+                dragState = cell.checked;
+                ev.preventDefault();
+                doSolve();
+            });
+            cell.addEventListener("mouseenter", (ev) => {
+                if ((ev.buttons & 1) == 0) {
+                    dragState = null;
+                } else if (dragState != null) {
+                    cell.checked = dragState;
+                    doSolve();
+                }
+            });
+            cell.addEventListener("click", (ev) => ev.preventDefault());
+        }
+
+        document.body.addEventListener("mousemove", (ev) => {
+            if ((ev.buttons & 1) == 0) {
+                dragState = null;
+            }
+
+        });
+
+        async function parseURL() {
+            let params = new URLSearchParams(location.search);
+
+            if (params.has("fumen")) {
+                await wasm_bindgen("./pkg/gomen_bg.wasm");
+
+                let decoded = JSON.parse(wasm_bindgen.decode_fumen(params.get("fumen")));
+                if (decoded == null) {
+                    console.error("provided invalid fumen in URL");
+                    return;
+                }
+
+                setGarbage(BigInt(decoded.field));
+
+                let queueCheck = /^([ILJOSTZ]|(\[[ILJOSTZ]+\]|\*)\d*)*$/;
+                if (decoded.comment != null && queueCheck.test(decoded.comment)) {
+                    queue.value = decoded.comment;
+                }
+
+                doSolve();
+            }
+        }
+        parseURL();
+
+        doSolve();
+
+    </script>
+
+</body>
+
+</html>
