@@ -68,7 +68,7 @@ github: [metadata]
 comments_engine: na
 
 # Disqus (Set to your disqus id)
-disqus: jekyll-tale
+disqus: scp020
 
 # Giscus
 giscus:
