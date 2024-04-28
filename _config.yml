@@ -65,7 +65,7 @@ google:
 github: [metadata]
 
 # can be ['disqus', 'giscus']
-comments_engine: na
+comments_engine: giscus
 
 # Disqus (Set to your disqus id)
 disqus: scp020
