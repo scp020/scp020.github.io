@@ -72,7 +72,7 @@ disqus: scp020
 
 # Giscus
 giscus:
-  repo: ''
+  repo: 'scp020/scp020.github.io'
   repo_id: ''
   category: ''
   category_id: ''
