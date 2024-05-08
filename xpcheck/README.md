@@ -1,1 +1,1 @@
-# 那个 genshin.txt 文件是评分表（.xlsx 文件）转 base64 后的 base64 码
+# 那个 genshin.txt 文件是评分表（.xlsx 文件）转 base64 后的 base64 码，可使用 python 的 base64.b64encode() 和 base64.b64decode() 进行编码和解码
