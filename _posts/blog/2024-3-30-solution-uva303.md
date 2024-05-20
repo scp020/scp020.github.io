@@ -44,30 +44,30 @@ keywords: UVA303, Pipe, 题解, UVA
 const double eps=1e-8;
 struct point
 {
-	double x,y;
-	point(){x=y=0;}
-	point(double x,double y){this->x=x,this->y=y;}
-	inline point operator-(const point &rhs) const{return point(x-rhs.x,y-rhs.y);}
-	inline double operator*(const point &rhs) const{return x*rhs.y-y*rhs.x;}
-	inline bool operator==(const point &rhs) const{return fabs(x-rhs.x)<=eps && fabs(y-rhs.y)<=eps;}
+    double x,y;
+    point(){x=y=0;}
+    point(double x,double y){this->x=x,this->y=y;}
+    inline point operator-(const point &rhs) const{return point(x-rhs.x,y-rhs.y);}
+    inline double operator*(const point &rhs) const{return x*rhs.y-y*rhs.x;}
+    inline bool operator==(const point &rhs) const{return fabs(x-rhs.x)<=eps && fabs(y-rhs.y)<=eps;}
 };
 inline int sgn(double x){return (fabs(x)<eps)?0:(x>0?1:-1);}
 struct seg
 {
-	point s,t;
-	inline seg(){}
-	inline seg(point s,point t){this->s=s,this->t=t;}
-	inline friend bool cross(const seg &lhs,const seg &rhs) // 第一个参数传直线，第二个参数传线段
-	{
-		return sgn((rhs.s-lhs.s)*(lhs.t-lhs.s))*sgn((rhs.t-lhs.s)*(lhs.t-lhs.s))<0;
-	}
-	inline friend point calc(const seg &lhs,const seg &rhs)
-	{
-		double ix,iy,rat;
-		rat=(rhs.t-lhs.s)*(rhs.s-lhs.s)/((rhs.t-lhs.s)*(rhs.s-lhs.s)-(rhs.t-lhs.t)*(rhs.s-lhs.t));
-		ix=lhs.s.x+(lhs.t.x-lhs.s.x)*rat,iy=lhs.s.y+(lhs.t.y-lhs.s.y)*rat;
-		return point(ix,iy);
-	}
+    point s,t;
+    inline seg(){}
+    inline seg(point s,point t){this->s=s,this->t=t;}
+    inline friend bool cross(const seg &lhs,const seg &rhs) // 第一个参数传直线，第二个参数传线段
+    {
+        return sgn((rhs.s-lhs.s)*(lhs.t-lhs.s))*sgn((rhs.t-lhs.s)*(lhs.t-lhs.s))<0;
+    }
+    inline friend point calc(const seg &lhs,const seg &rhs)
+    {
+        double ix,iy,rat;
+        rat=(rhs.t-lhs.s)*(rhs.s-lhs.s)/((rhs.t-lhs.s)*(rhs.s-lhs.s)-(rhs.t-lhs.t)*(rhs.s-lhs.t));
+        ix=lhs.s.x+(lhs.t.x-lhs.s.x)*rat,iy=lhs.s.y+(lhs.t.y-lhs.s.y)*rat;
+        return point(ix,iy);
+    }
 };
 int n;
 point top[30],bot[30];
@@ -76,39 +76,39 @@ seg lig;
 bool flag;
 inline void solve()
 {
-	int fl=0;
-	for(int i=1;i<n && !fl;i++)
-	{
-		if(sgn((lig.t-lig.s)*(top[i]-lig.s))==-1 || sgn((lig.t-lig.s)*(bot[i]-lig.s))==1)
-		{
-			fl=1;
-			break;
-		}
-		if(cross(lig,seg(top[i],top[i+1])) || calc(lig,seg(top[i],top[i+1]))==top[i] && sgn((lig.t-lig.s)*(top[i+1]-lig.s))==-1)
-			ans=std::max(ans,calc(lig,seg(top[i],top[i+1])).x),fl=1;
-		if(cross(lig,seg(bot[i],bot[i+1])) || calc(lig,seg(bot[i],bot[i+1]))==bot[i] && sgn((lig.t-lig.s)*(bot[i+1]-lig.s))==1)
-			ans=std::max(ans,calc(lig,seg(bot[i],bot[i+1])).x),fl=1;
-	}
-	if(!fl) flag=1;
+    int fl=0;
+    for(int i=1;i<n && !fl;i++)
+    {
+        if(sgn((lig.t-lig.s)*(top[i]-lig.s))==-1 || sgn((lig.t-lig.s)*(bot[i]-lig.s))==1)
+        {
+            fl=1;
+            break;
+        }
+        if(cross(lig,seg(top[i],top[i+1])) || calc(lig,seg(top[i],top[i+1]))==top[i] && sgn((lig.t-lig.s)*(top[i+1]-lig.s))==-1)
+            ans=std::max(ans,calc(lig,seg(top[i],top[i+1])).x),fl=1;
+        if(cross(lig,seg(bot[i],bot[i+1])) || calc(lig,seg(bot[i],bot[i+1]))==bot[i] && sgn((lig.t-lig.s)*(bot[i+1]-lig.s))==1)
+            ans=std::max(ans,calc(lig,seg(bot[i],bot[i+1])).x),fl=1;
+    }
+    if(!fl) flag=1;
 }
 int main()
 {
-	while(1)
-	{
-		scanf("%d",&n),ans=-1e18,flag=0;
-		if(n==0) break; 
-		for(int i=1;i<=n;i++) scanf("%lf%lf",&top[i].x,&top[i].y),bot[i]=top[i]-point(0,1);
-		for(int i=1;i<=n && !flag;i++)
-			for(int j=i+1;j<=n && !flag;j++)
-			{
-				lig=seg(top[i],top[j]),solve();
-				lig=seg(top[i],bot[j]),solve();
-				lig=seg(bot[i],top[j]),solve();
-				lig=seg(bot[i],bot[j]),solve();
-			}
-		if(flag) printf("Through all the pipe.\n");
-		else printf("%.2lf\n",ans+eps);
-	}
-	return 0;
+    while(1)
+    {
+        scanf("%d",&n),ans=-1e18,flag=0;
+        if(n==0) break; 
+        for(int i=1;i<=n;i++) scanf("%lf%lf",&top[i].x,&top[i].y),bot[i]=top[i]-point(0,1);
+        for(int i=1;i<=n && !flag;i++)
+            for(int j=i+1;j<=n && !flag;j++)
+            {
+                lig=seg(top[i],top[j]),solve();
+                lig=seg(top[i],bot[j]),solve();
+                lig=seg(bot[i],top[j]),solve();
+                lig=seg(bot[i],bot[j]),solve();
+            }
+        if(flag) printf("Through all the pipe.\n");
+        else printf("%.2lf\n",ans+eps);
+    }
+    return 0;
 }
 ```

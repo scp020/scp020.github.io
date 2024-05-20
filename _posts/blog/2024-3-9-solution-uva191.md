@@ -48,68 +48,68 @@ keywords: UVA191, Intersection, 题解, UVA
 #include<bits/stdc++.h>
 namespace fast_IO
 {
-	/**
-	 * 快读快写
-	*/
+    /**
+     * 快读快写
+    */
 };
 using namespace fast_IO;
 #define int long long
 int t,X1,Y1,X2,Y2;
 struct point
 {
-	int x,y;
-	point()
-	{
-		x=y=0;
-	}
-	point(int x,int y)
-	{
-		this->x=x,this->y=y;
-	}
-	inline point operator-(const point &rhs) const
-	{
-		return point(x-rhs.x,y-rhs.y);
-	}
-	inline int operator*(const point &rhs)
-	{
-		return x*rhs.y-y*rhs.x;
-	}
+    int x,y;
+    point()
+    {
+        x=y=0;
+    }
+    point(int x,int y)
+    {
+        this->x=x,this->y=y;
+    }
+    inline point operator-(const point &rhs) const
+    {
+        return point(x-rhs.x,y-rhs.y);
+    }
+    inline int operator*(const point &rhs)
+    {
+        return x*rhs.y-y*rhs.x;
+    }
 };
 point po1,po2,po3,po4;
 inline int sgn(int x)
 {
-	return x==0?0:(x>0?1:-1);
+    return x==0?0:(x>0?1:-1);
 }
 struct seg
 {
-	point s,t;
-	inline friend bool cross(const seg &lhs,const seg &rhs)
-	{
-		return std::max(lhs.s.x,lhs.t.x)>=std::min(rhs.s.x,rhs.t.x) && 
-		std::max(lhs.s.y,lhs.t.y)>=std::min(rhs.s.y,rhs.t.y) && 
-		std::max(rhs.s.x,rhs.t.x)>=std::min(lhs.s.x,lhs.t.x) && 
-		std::max(rhs.s.y,rhs.t.y)>=std::min(lhs.s.y,lhs.t.y) && 
-		sgn((rhs.s-lhs.s)*(lhs.t-lhs.s))*sgn((rhs.t-lhs.s)*(lhs.t-lhs.s))<=0 && 
-		sgn((lhs.s-rhs.s)*(rhs.t-rhs.s))*sgn((lhs.t-rhs.s)*(rhs.t-rhs.s))<=0;
-	}
+    point s,t;
+    inline friend bool cross(const seg &lhs,const seg &rhs)
+    {
+        return std::max(lhs.s.x,lhs.t.x)>=std::min(rhs.s.x,rhs.t.x) && 
+        std::max(lhs.s.y,lhs.t.y)>=std::min(rhs.s.y,rhs.t.y) && 
+        std::max(rhs.s.x,rhs.t.x)>=std::min(lhs.s.x,lhs.t.x) && 
+        std::max(rhs.s.y,rhs.t.y)>=std::min(lhs.s.y,lhs.t.y) && 
+        sgn((rhs.s-lhs.s)*(lhs.t-lhs.s))*sgn((rhs.t-lhs.s)*(lhs.t-lhs.s))<=0 && 
+        sgn((lhs.s-rhs.s)*(rhs.t-rhs.s))*sgn((lhs.t-rhs.s)*(rhs.t-rhs.s))<=0;
+    }
 };
 seg a,s1,s2,s3,s4,s5,s6;
 signed main()
 {
-	in>>t;
-	while(t--)
-	{
-		in>>a.s.x>>a.s.y>>a.t.x>>a.t.y>>X1>>Y1>>X2>>Y2;
-		if(X1>X2) std::swap(X1,X2);
-		if(Y1>Y2) std::swap(Y1,Y2);
-		po1=(point){X1,Y1},po2=(point){X1,Y2},po3=(point){X2,Y1},po4=(point){X2,Y2};
-		s1=(seg){po1,po2},s2=(seg){po2,po4},s3=(seg){po4,po3},s4=(seg){po3,po1};
-		s5=(seg){po1,po4},s6=(seg){po2,po3};
-		if(!cross(a,s1) && !cross(a,s2) && !cross(a,s3) && !cross(a,s4) && !cross(a,s5) && !cross(a,s6))
-			out<<"F\n";
-		else out<<"T\n";
-	}
-	fwrite(Ouf,1,p3-Ouf,stdout),fflush(stdout);
-	return 0;
+    in>>t;
+    while(t--)
+    {
+        in>>a.s.x>>a.s.y>>a.t.x>>a.t.y>>X1>>Y1>>X2>>Y2;
+        if(X1>X2) std::swap(X1,X2);
+        if(Y1>Y2) std::swap(Y1,Y2);
+        po1=(point){X1,Y1},po2=(point){X1,Y2},po3=(point){X2,Y1},po4=(point){X2,Y2};
+        s1=(seg){po1,po2},s2=(seg){po2,po4},s3=(seg){po4,po3},s4=(seg){po3,po1};
+        s5=(seg){po1,po4},s6=(seg){po2,po3};
+        if(!cross(a,s1) && !cross(a,s2) && !cross(a,s3) && !cross(a,s4) && !cross(a,s5) && !cross(a,s6))
+            out<<"F\n";
+        else out<<"T\n";
+    }
+    fwrite(Ouf,1,p3-Ouf,stdout),fflush(stdout);
+    return 0;
 }
 ```

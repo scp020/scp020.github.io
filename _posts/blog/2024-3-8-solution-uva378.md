@@ -36,145 +36,145 @@ keywords: UVA378, Intersecting Lines, 题解, UVA
 #include<bits/stdc++.h>
 namespace fast_IO
 {
-	/**
-	 * 省略了一部分
-	*/
-	inline void read(int &x,char c=Getchar())
-	{
-		bool f=c!=45;
-		x=0;
-		while(c<48 or c>57) c=Getchar(),f&=c!=45;
-		while(c>=48 and c<=57) x=(x<<3)+(x<<1)+(c^48),c=Getchar();
-		x=f?x:-x;
-	}
-	inline void write(int x)
-	{
-		if(x<0) Putchar(45),x=-x;
-		if(x>=10) write(x/10),x%=10;
-		Putchar(x^48);
-	}
-	inline void read(__int128 &x,char c=Getchar())
-	{
-		bool f=c!=45;
-		x=0;
-		while(c<48 or c>57) c=Getchar(),f&=c!=45;
-		while(c>=48 and c<=57) x=(x<<3)+(x<<1)+(c^48),c=Getchar();
-		x=f?x:-x;
-	}
-	inline void write(__int128 x)
-	{
-		if(x<0) Putchar(45),x=-x;
-		if(x>=10) write(x/10),x%=10;
-		Putchar(x^48);
-	}
-	inline bool inrange(const char &ch)
-	{
-		if(ch>=33 && ch<=126) return true;
-		return false;
-	}
-	inline void read(std::string &st,char c=Getchar())
-	{
-		st.clear();
-		while(!inrange(c)) c=Getchar();
-		while(inrange(c)) st+=c,c=Getchar();
-	}
-	inline void write(std::string st)
-	{
-		for(int i=0;i<st.size();i++) Putchar(st[i]);
-	}
-	inline void read(char &ch)
-	{
-		ch=Getchar();
-		while(!inrange(ch)) ch=Getchar();
-	}
-	inline void write(const char &ch)
-	{
-		Putchar(ch);
-	}
-	inline void write(double x,int fix=2)
-	{
-		x+=x>0?my_round[fix+1]:-my_round[fix+1],write((__int128)x),x=x>0?x:-x,x-=(__int128)x;
-		if(fix)
-		{
-			Putchar(46);
-			while(fix--) x*=10,Putchar(((int)x)^48),x-=(int)x;
-		}
-	}
-	class fastin
-	{
-	public:
-		template<typename T>
-		inline fastin &operator>>(T &x)
-		{
-			read(x);
-			return *this;
-		}
-	};
-	class fastout
-	{
-	public:
-		template<typename T>
-		inline fastout &operator<<(T x)
-		{
-			write(x);
-			return *this;
-		}
-	};
-	fastin in;
-	fastout out;
+    /**
+     * 省略了一部分
+    */
+    inline void read(int &x,char c=Getchar())
+    {
+        bool f=c!=45;
+        x=0;
+        while(c<48 or c>57) c=Getchar(),f&=c!=45;
+        while(c>=48 and c<=57) x=(x<<3)+(x<<1)+(c^48),c=Getchar();
+        x=f?x:-x;
+    }
+    inline void write(int x)
+    {
+        if(x<0) Putchar(45),x=-x;
+        if(x>=10) write(x/10),x%=10;
+        Putchar(x^48);
+    }
+    inline void read(__int128 &x,char c=Getchar())
+    {
+        bool f=c!=45;
+        x=0;
+        while(c<48 or c>57) c=Getchar(),f&=c!=45;
+        while(c>=48 and c<=57) x=(x<<3)+(x<<1)+(c^48),c=Getchar();
+        x=f?x:-x;
+    }
+    inline void write(__int128 x)
+    {
+        if(x<0) Putchar(45),x=-x;
+        if(x>=10) write(x/10),x%=10;
+        Putchar(x^48);
+    }
+    inline bool inrange(const char &ch)
+    {
+        if(ch>=33 && ch<=126) return true;
+        return false;
+    }
+    inline void read(std::string &st,char c=Getchar())
+    {
+        st.clear();
+        while(!inrange(c)) c=Getchar();
+        while(inrange(c)) st+=c,c=Getchar();
+    }
+    inline void write(std::string st)
+    {
+        for(int i=0;i<st.size();i++) Putchar(st[i]);
+    }
+    inline void read(char &ch)
+    {
+        ch=Getchar();
+        while(!inrange(ch)) ch=Getchar();
+    }
+    inline void write(const char &ch)
+    {
+        Putchar(ch);
+    }
+    inline void write(double x,int fix=2)
+    {
+        x+=x>0?my_round[fix+1]:-my_round[fix+1],write((__int128)x),x=x>0?x:-x,x-=(__int128)x;
+        if(fix)
+        {
+            Putchar(46);
+            while(fix--) x*=10,Putchar(((int)x)^48),x-=(int)x;
+        }
+    }
+    class fastin
+    {
+    public:
+        template<typename T>
+        inline fastin &operator>>(T &x)
+        {
+            read(x);
+            return *this;
+        }
+    };
+    class fastout
+    {
+    public:
+        template<typename T>
+        inline fastout &operator<<(T x)
+        {
+            write(x);
+            return *this;
+        }
+    };
+    fastin in;
+    fastout out;
 };
 using namespace fast_IO;
 int n;
 struct point
 {
-	int x,y;
-	point()
-	{
-		x=y=0;
-	}
-	point(int x,int y)
-	{
-		this->x=x,this->y=y;
-	}
-	inline point operator-(const point &rhs) const
-	{
-		return point(x-rhs.x,y-rhs.y);
-	}
-	inline int operator*(const point &rhs)
-	{
-		return x*rhs.y-y*rhs.x;
-	}
+    int x,y;
+    point()
+    {
+        x=y=0;
+    }
+    point(int x,int y)
+    {
+        this->x=x,this->y=y;
+    }
+    inline point operator-(const point &rhs) const
+    {
+        return point(x-rhs.x,y-rhs.y);
+    }
+    inline int operator*(const point &rhs)
+    {
+        return x*rhs.y-y*rhs.x;
+    }
 };
 inline int sgn(int x)
 {
-	return x==0?0:(x>0?1:-1);
+    return x==0?0:(x>0?1:-1);
 }
 struct seg
 {
-	point s,t;
+    point s,t;
 };
 seg a,b;
 inline void calc()
 {
-	double ix,iy,rat;
-	rat=(b.t-a.s)*(b.s-a.s)*1.0/((b.t-a.s)*(b.s-a.s)-(b.t-a.t)*(b.s-a.t));
-	ix=a.s.x*1.0+(a.t.x-a.s.x)*rat,iy=a.s.y*1.0+(a.t.y-a.s.y)*rat;
-	out<<"POINT "<<ix<<' '<<iy<<'\n';
+    double ix,iy,rat;
+    rat=(b.t-a.s)*(b.s-a.s)*1.0/((b.t-a.s)*(b.s-a.s)-(b.t-a.t)*(b.s-a.t));
+    ix=a.s.x*1.0+(a.t.x-a.s.x)*rat,iy=a.s.y*1.0+(a.t.y-a.s.y)*rat;
+    out<<"POINT "<<ix<<' '<<iy<<'\n';
 }
 int main()
 {
-	in>>n,out<<"INTERSECTING LINES OUTPUT\n";
-	for(int i=1;i<=n;i++)
-	{
-		in>>a.s.x>>a.s.y>>a.t.x>>a.t.y>>b.s.x>>b.s.y>>b.t.x>>b.t.y;
-		if((a.t-a.s)*(b.t-b.s)==0)
-		{
-			if((a.t-a.s)*(b.s-a.s)==0) out<<"LINE\n";
-			else out<<"NONE\n";
-		}else calc();
-	}
-	out<<"END OF OUTPUT\n";
-	fwrite(Ouf,1,p3-Ouf,stdout),fflush(stdout);
-	return 0;
+    in>>n,out<<"INTERSECTING LINES OUTPUT\n";
+    for(int i=1;i<=n;i++)
+    {
+        in>>a.s.x>>a.s.y>>a.t.x>>a.t.y>>b.s.x>>b.s.y>>b.t.x>>b.t.y;
+        if((a.t-a.s)*(b.t-b.s)==0)
+        {
+            if((a.t-a.s)*(b.s-a.s)==0) out<<"LINE\n";
+            else out<<"NONE\n";
+        }else calc();
+    }
+    out<<"END OF OUTPUT\n";
+    fwrite(Ouf,1,p3-Ouf,stdout),fflush(stdout);
+    return 0;
 }
 ```
