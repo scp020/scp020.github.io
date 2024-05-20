@@ -15,8 +15,7 @@ github_username: scp020
 location: Shenyang, China
 email: 33299235@qq.com
 
-github:
-  repository_url: https://github.com/scp020/scp020.github.io
+github.repository_url: https://github.com/scp020/scp020.github.io
 
 # Navigation
 navs:
