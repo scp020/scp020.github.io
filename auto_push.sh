@@ -3,7 +3,7 @@
 :<<!
 
 作者：scp020
-版本：1.0.0
+版本：1.1.0
 时间：2024.5.21
 版本更新：无
 
@@ -21,13 +21,19 @@ yes="y"
 
 no="n"
 
-read -p "是否使用 commit 信息模板(y/n)： " ifusetemplate
+one="1"
 
-if [ "${ifusetemplate}" = "${yes}" ];then
+two="2"
+
+three="3"
+
+read -p "请选择 commit 信息模板(1/2/3)： " templatetype
+
+if [ "${templatetype}" = "${one}" ];then
 git commit -m "上传一篇题解 on ${time}"
 git push
 echo "成功提交修改！"
-elif [ "${ifusetemplate}" = "${no}" ];then
+elif [ "${templatetype}" = "${two}" ];then
 read -p "请输入 commit 信息： " co
 git commit -m "${co}"
 git push
