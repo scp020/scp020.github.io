@@ -38,7 +38,7 @@ git push
 echo "成功提交修改！"
 elif [ "${templatetype}" = "${two}" ];then
 read -p "需要修改几篇题解? " numoffix
-git commit -m "上传 ${numoffix} 篇题解 on ${time}"
+git commit -m "修改 ${numoffix} 篇题解 on ${time}"
 git push
 echo "成功提交修改！"
 elif [ "${templatetype}" = "${three}" ];then
