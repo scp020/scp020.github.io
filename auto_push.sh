@@ -27,13 +27,21 @@ two="2"
 
 three="3"
 
-read -p "请选择 commit 信息模板(1/2/3)： " templatetype
+echo -e "1. 上传题解\n2. 修改题解\n3. 自定义\n请选择 commit 信息模板(1/2/3)： \c"
+
+read templatetype
 
 if [ "${templatetype}" = "${one}" ];then
-git commit -m "上传一篇题解 on ${time}"
+read -p "需要上传几篇题解? " numofupdate
+git commit -m "上传 ${numofupdate} 篇题解 on ${time}"
 git push
 echo "成功提交修改！"
 elif [ "${templatetype}" = "${two}" ];then
+read -p "需要修改几篇题解? " numoffix
+git commit -m "上传 ${numoffix} 篇题解 on ${time}"
+git push
+echo "成功提交修改！"
+elif [ "${templatetype}" = "${three}" ];then
 read -p "请输入 commit 信息： " co
 git commit -m "${co}"
 git push
