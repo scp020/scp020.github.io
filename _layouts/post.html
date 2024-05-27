@@ -1,6 +1,21 @@
 ---
 layout: default
 ---
+<html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script language="JavaScript">
+	var e = /(^AT|^CF|^SP|^P|^UVA|^U|^T|^B)/;
+	$(document).ready(function() {
+		$("h1").dblclick(function() {
+			if(e.test(window.getSelection().toString())) {
+				var fl = confirm("是否打开题目链接 \n https://www.luogu.com.cn/problem/"+window.getSelection().toString());
+				if(fl == true) window.open("https://www.luogu.com.cn/problem/"+window.getSelection().toString());
+			}
+		});
+	});
+</script>
+</html>
+
 <section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15, ''}}">
 <div class="container">
   <div class="columns">
