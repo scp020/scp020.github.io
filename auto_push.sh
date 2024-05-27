@@ -17,10 +17,6 @@ git add .
 
 time=$(date "+%Y.%m.%d")
 
-yes="y"
-
-no="n"
-
 one="1"
 
 two="2"
