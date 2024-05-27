@@ -35,6 +35,7 @@ navs:
 subscribe_rss: /feed.xml
 
 # Jekyll
+# theme: minima
 markdown: kramdown
 kramdown:
     input: GFM
