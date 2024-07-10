@@ -3,7 +3,7 @@ layout: post
 title: CF297C Splitting the Uniqueness 题解
 categories: Blog
 description: none
-keywords: CF899F, Splitting the Uniqueness, 题解, codeforces
+keywords: CF297C, Splitting the Uniqueness, 题解, codeforces
 ---
 
 非常好构造题，使我的草稿纸旋转。
